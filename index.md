@@ -12,3 +12,4 @@
 >julia> mkdir()\
 >julia> cd("myPluto")\
 >julia> readdir()\
+>julia> readdir("images")
