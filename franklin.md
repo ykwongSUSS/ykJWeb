@@ -1,29 +1,45 @@
 @def title = "Franklin"
 @def tags = ["syntax", "code"]
 
-### Required:
-1. julia extension on VSCode `alt-j`, `alt-o`
-2. http live-server on VSCode
-3. Franklin addin package to Julia
-4. Operate from Terminal
+# Franklin (Static Site Generator)
 
-### Starting Julia from Terminal
-1. `alt-j`, `alt-o`
-1. pwd() to check current directory
-1. This readme.md file is here: "/Users/ykwong/myJulia/julia-Franklin"
-1. If new: mkdir for website folder ykWeb
-1. cd("ykWeb")
-1. julia> ]
-1. pkg> add Franklin
-1. pkg> status
+I use Franklin to build this website.
+
+### Franklin Requirements:
+
+1. Julia extension on VSCode `alt-j`, `alt-o`
+1. using Franklin from Julia
+1. create `ykJWeb` website from Franklin
+1. Edit html files from VSCode
+1. http live-server on VSCode
+
+### Create NewSite using Franklin from Terminal
+
+1. `alt-j`, `alt-o` to get julia prompt in VSCode-Terminal
+> julia> pwd()\
+> julia> "/Users/ykwong/myJulia"
+
+2. make a directory for all the websites files
+> julia> mkdir("ykWeb")\
+> julia> cd("ykWeb")
+
+3. Add the Franklin package
+> julia> ]\
+> pkg> add Franklin\
+> pkg> status
+
 ### Create and serve newsite
-1. julia> `using Franklin`
-1. `newsite("ykJWeb"; template="jemdoc")`
+
+> julia> using Franklin\
+> julia> newsite("ykJWeb"; template="jemdoc") 
+
 1. current directory is ykJWeb
-1. pkg> `activate .` #impt: to activate at this directory
-1. julia> `serve()`  # then can use serve() if stopped
-### Serving from another web
-1. cd("../SandBox")
-1. `pwd()` to make sure in the sandbox web directory
-1. pkg> `activate .` #impt: to activate at this directory
-1. julia> `serve()`
+> pkg>activate . #impt to activate in this directory\
+> julia>serve() #serve() again if localhost stops
+
+### Restart and Edit ykJWeb
+
+1. Restart VSCode-Julia
+> julia> cd("Users/ykwong/myJulia/ykWeb/ykJWeb")\
+> pkg> activate . #impt\
+> julia> serve()
