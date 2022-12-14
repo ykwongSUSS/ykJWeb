@@ -2,50 +2,50 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
-    <loc>menu4/index.html</loc>
-    <lastmod>2022-12-13</lastmod>
+    <loc>m1-RDatasets/index.html</loc>
+    <lastmod>2022-12-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>menu1/index.html</loc>
-    <lastmod>2022-12-13</lastmod>
+    <loc>m2-DataFrames/index.html</loc>
+    <lastmod>2022-12-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>menu2/index.html</loc>
-    <lastmod>2022-12-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-</url>
-<url>
-    <loc>menu3/index.html</loc>
-    <lastmod>2022-12-13</lastmod>
+    <loc>m3-Gadfly/index.html</loc>
+    <lastmod>2022-12-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
     <loc>pluto/index.html</loc>
-    <lastmod>2022-12-13</lastmod>
+    <lastmod>2022-12-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
     <loc>index.html</loc>
-    <lastmod>2022-12-13</lastmod>
+    <lastmod>2022-12-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>m4-Projects/index.html</loc>
+    <lastmod>2022-12-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
     <loc>franklin/index.html</loc>
-    <lastmod>2022-12-13</lastmod>
+    <lastmod>2022-12-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
     <loc>404/index.html</loc>
-    <lastmod>2022-12-13</lastmod>
+    <lastmod>2022-12-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
