@@ -10,18 +10,22 @@ tags = ["dataframe", "code", "image"]
 
 ## manual DataEntry by Arrays
 
-```julia:./m2_1
+```julia:./m21
+using Pkg
+Pkg.add("DataFrames")
 using DataFrames
 A = ["NSHD","SHBS","SBIZ","SST"]
 B = [25,14,23,13]
 df1 = DataFrame(sch=A,pgms=B)
 ```
 
-\show{./m2_1}
+\show{./m21}
 
 ## manual DataEntry by CSV
 
-```julia:./m2_2
+```julia:./m22
+using Pkg
+Pkg.add("CSV")
 using DataFrames, CSV
 df2 = CSV.read(IOBuffer("""
 sch2, pgms2
@@ -32,41 +36,47 @@ SST, 3
 """),DataFrame, delim=",",ignorerepeated=true)
 ```
 
-\show{./m2_2}
+\show{./m22}
 
 ## import csv files using `CSV.read`
 
 <!-- SchPgms.csv is in the _assets/scripts foldern -->
 
-```julia:./m2_3
+```julia:./m23
 using DataFrames, CSV
 df3 = CSV.read("_assets/csv/SchPgms.csv", DataFrame)
 ```
 
-\show{./m2_3}
+\show{./m23}
 
 ## `sort` df3 by pgms in descending order
 
-```julia:./m2_4
+```julia:./m24
 df4 = sort(df3, :pgms, rev=true)
 ```
 
-\show{./m2_4}
+\show{./m24}
 
-## choose rows using `filter` 
-```julia:./m2_5
+## choose rows using `filter`
+
+```julia:./m25
 filter(:sch => n->n == "NSHD",df4)
 ```
-\show{./m2_5}
+
+\show{./m25}
 
 ## choose rows using `subset`
-```julia:./m2_6
+
+```julia:./m26
 subset(df4, :sch => ByRow(==("SST")))
 ```
-\show{./m2_6}
+
+\show{./m26}
 
 ## choose columns using `select`
-```julia:./m2_7
+
+```julia:./m27
 select(df4, :pgms)
 ```
-\show{./m2_7}
+
+\show{./m27}
