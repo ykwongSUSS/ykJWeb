@@ -1,4 +1,6 @@
 # This file was generated, do not modify it. # hide
+using Pkg
+Pkg.add("CSV")
 using DataFrames, CSV
 df2 = CSV.read(IOBuffer("""
 sch2, pgms2
