@@ -8,7 +8,9 @@ tags = ["dataframe", "code", "image"]
 
 \toc
 
-## manual DataEntry by Arrays
+## 1. Data Entry
+
+### 1.1 manual DataEntry by Arrays
 
 ```julia:./m21
 using Pkg
@@ -16,19 +18,19 @@ Pkg.add("DataFrames")
 using DataFrames
 A = ["NSHD","SHBS","SBIZ","SST"]
 B = [25,14,23,13]
-df1 = DataFrame(sch=A,pgms=B)
+df = DataFrame(sch=A,pgms=B)
 ```
 
 \show{./m21}
 
-## manual DataEntry by CSV
+### 1.2 manual DataEntry by CSV.read(IOBuffer)
 
 ```julia:./m22
 using Pkg
 Pkg.add("CSV")
 using DataFrames, CSV
-df2 = CSV.read(IOBuffer("""
-sch2, pgms2
+df1 = CSV.read(IOBuffer("""
+sch, pgms
 SBIZ, 12
 NSHD,14
 SHBS, 4
@@ -38,45 +40,68 @@ SST, 3
 
 \show{./m22}
 
-## import csv files using `CSV.read`
+## 2. import csv files using `CSV.read`
 
 <!-- SchPgms.csv is in the _assets/scripts foldern -->
 
 ```julia:./m23
 using DataFrames, CSV
-df3 = CSV.read("_assets/csv/SchPgms.csv", DataFrame)
+df2 = CSV.read("_assets/csv/SchPgms.csv", DataFrame)
 ```
 
 \show{./m23}
 
-## `sort` df3 by pgms in descending order
+## 3. Sort df
+
+### 3.1 `sort` df3 by pgms in descending order
 
 ```julia:./m24
-df4 = sort(df3, :pgms, rev=true)
+using DataFrames, CSV
+df2 = CSV.read("_assets/csv/SchPgms.csv", DataFrame)
+df3 = sort(df2, :pgms, rev=true)
 ```
 
 \show{./m24}
 
-## choose rows using `filter`
+## 4. Rows and Columns
+
+### 4.1 choose rows using `filter`
+
+(\* special case: the df appears at the end)
 
 ```julia:./m25
-filter(:sch => n->n == "NSHD",df4)
+using DataFrames
+filter(:sch => n -> n=="NSHD",df4)
 ```
 
 \show{./m25}
 
-## choose rows using `subset`
+### 4.2 choose rows using `subset`
+
+(this is better, consistent df, consistent ByRow)
 
 ```julia:./m26
-subset(df4, :sch => ByRow(==("SST")))
+subset(df3, :sch => ByRow(==("SST")))
 ```
 
 \show{./m26}
 
-## choose columns using `select`
+### 4.3 choose columns using `select`
 
 ```julia:./m27
-select(df4, :pgms)
+using DataFrames
+select(df3, :pgms)
 ```
 
 \show{./m27}
+
+## 5. Transform
+
+### add new column
+
+```julia:./m28
+using DataFrames
+transform(df3,:, :pgms => ByRow(x -> x+1)=>:pgmsAdd1)
+```
+
+\show{./m28}

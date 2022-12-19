@@ -2,7 +2,7 @@
 title = "m1-RDatasets.md"
 hascode = true
 date = Date(2022, 12, 12)
-tags = ["data", "syntax", "code"]
+tags = ["data", "RDatasets", "code","ggplot2","iris","diamonds"]
 +++
 
 # Working with RDatasets

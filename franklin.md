@@ -1,5 +1,5 @@
 @def title = "Franklin.md"
-@def tags = ["syntax", "code"]
+@def tags = ["md", "Franklin","activate", "serve"]
 
 # Franklin (Static Site Generator)
 
@@ -12,10 +12,14 @@ Refer YouTube: [Intro to Franklin, a Julia Static Site Generator](https://www.yo
 1. Open VSCode. Open julia-Franklin workspace.
 1. Activate Julia extension on VSCode `alt-j`, `alt-o`
 1. cd("`/Users/ykwong/myJulia/julia-Franklin/ykWeb/ykJWeb`")
-1. julia> add Franklin from pkg>
+1. pkg> add Franklin 
 1. julia> using Franklin
-1. if newsite then create `ykJWeb` website using a Franklin template
-1. if not newsite then `activate .` from directory and `serve()`
+1. `activate .` at current directory ykJWeb
+1. if newsite then 
+      julia> newsite("ykJWeb"; template="jemdoc")
+   else
+      `activate .` at current directory ykJWeb
+1. julia> `serve()`
 1. Edit html files from VSCode
 1. http live-server on VSCode
 
