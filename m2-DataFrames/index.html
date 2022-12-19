@@ -1,64 +1,59 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/ykJWeb/libs/highlight/styles/github.min.css"> <link rel=stylesheet  href="/ykJWeb/css/franklin.css"> <link rel=stylesheet  href="/ykJWeb/css/jemdoc.css"> <link rel=icon  href="/ykJWeb/assets/favicon.png"> <title>m2-DataFrames.md</title> <main class=outside > <div class=box > <aside class=layout-menu > <div class=menu-category >myJulia</div> <div class="menu-item "><a href="/ykJWeb/">Home</a></div> <div class="menu-item "><a href="/ykJWeb/pluto">Pluto</a></div> <div class="menu-item "><a href="/ykJWeb/franklin">Franklin</a></div> <div class=menu-category >Julia Code</div> <div class="menu-item "><a href="/ykJWeb/m1-RDatasets/">RDatasets</a></div> <div class="menu-item "><a href="/ykJWeb/m2-DataFrames/">DataFrames</a></div> <div class="menu-item "><a href="/ykJWeb/m3-Gadfly/">Gadfly</a></div> <div class="menu-item "><a href="/ykJWeb/m4-Projects/">Projects</a></div> </aside> <div class=layout-content > <div class=franklin-content > <h1 id=dataframes ><a href="#dataframes" class=header-anchor >DataFrames</a></h1> <div class=franklin-toc ><ol><li><a href="#manual_dataentry_by_arrays">manual DataEntry by Arrays</a><li><a href="#manual_dataentry_by_csv">manual DataEntry by CSV</a><li><a href="#import_csv_files_using_csvread">import csv files using <code>CSV.read</code></a><li><a href="#sort_df3_by_pgms_in_descending_order"><code>sort</code> df3 by pgms in descending order</a><li><a href="#choose_rows_using_filter">choose rows using <code>filter</code></a><li><a href="#choose_rows_using_subset">choose rows using <code>subset</code></a><li><a href="#choose_columns_using_select">choose columns using <code>select</code></a></ol></div> <h2 id=manual_dataentry_by_arrays ><a href="#manual_dataentry_by_arrays" class=header-anchor >manual DataEntry by Arrays</a></h2> <pre><code class="julia hljs"><span class=hljs-keyword >using</span> Pkg
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/ykJWeb/libs/highlight/styles/github.min.css"> <link rel=stylesheet  href="/ykJWeb/css/franklin.css"> <link rel=stylesheet  href="/ykJWeb/css/jemdoc.css"> <link rel=icon  href="/ykJWeb/assets/favicon.png"> <title>m2-DataFrames.md</title> <main class=outside > <div class=box > <aside class=layout-menu > <div class=menu-category >myJulia</div> <div class="menu-item "><a href="/ykJWeb/">Home</a></div> <div class="menu-item "><a href="/ykJWeb/pluto">Pluto</a></div> <div class="menu-item "><a href="/ykJWeb/franklin">Franklin</a></div> <div class=menu-category >Julia Code</div> <div class="menu-item "><a href="/ykJWeb/m1-RDatasets/">RDatasets</a></div> <div class="menu-item "><a href="/ykJWeb/m2-DataFrames/">DataFrames</a></div> <div class="menu-item "><a href="/ykJWeb/m3-Gadfly/">Gadfly</a></div> <div class="menu-item "><a href="/ykJWeb/m4-Projects/">Projects</a></div> </aside> <div class=layout-content > <div class=franklin-content > <h1 id=dataframes ><a href="#dataframes" class=header-anchor >DataFrames</a></h1> <div class=franklin-toc ><ol><li><a href="#data_entry"><ol> <li><p>Data Entry</p> </ol> </a><ol><li><a href="#11_manual_dataentry_by_arrays">1.1 manual DataEntry by Arrays</a><li><a href="#12_manual_dataentry_by_csvreadiobuffer">1.2 manual DataEntry by CSV.read&#40;IOBuffer&#41;</a></ol><li><a href="#ol_start2_import_csv_files_using_csvread"><ol start=2 > <li><p>import csv files using <code>CSV.read</code></p> </ol> </a><li><a href="#ol_start3_sort_df"><ol start=3 > <li><p>Sort df</p> </ol> </a><ol><li><a href="#31_sort_df3_by_pgms_in_descending_order">3.1 <code>sort</code> df3 by pgms in descending order</a></ol><li><a href="#ol_start4_rows_and_columns"><ol start=4 > <li><p>Rows and Columns</p> </ol> </a><ol><li><a href="#41_choose_rows_using_filter">4.1 choose rows using <code>filter</code></a><li><a href="#42_choose_rows_using_subset">4.2 choose rows using <code>subset</code></a><li><a href="#43_choose_columns_using_select">4.3 choose columns using <code>select</code></a></ol><li><a href="#ol_start5_transform"><ol start=5 > <li><p>Transform</p> </ol> </a><ol><li><a href="#add_new_column">add new column</a></ol></ol></div> <h2 id=data_entry ><a href="#data_entry" class=header-anchor ><ol> <li><p>Data Entry</p> </ol> </a></h2> <h3 id=11_manual_dataentry_by_arrays ><a href="#11_manual_dataentry_by_arrays" class=header-anchor >1.1 manual DataEntry by Arrays</a></h3> <pre><code class="julia hljs"><span class=hljs-keyword >using</span> Pkg
 Pkg.add(<span class=hljs-string >&quot;DataFrames&quot;</span>)
 <span class=hljs-keyword >using</span> DataFrames
 A = [<span class=hljs-string >&quot;NSHD&quot;</span>,<span class=hljs-string >&quot;SHBS&quot;</span>,<span class=hljs-string >&quot;SBIZ&quot;</span>,<span class=hljs-string >&quot;SST&quot;</span>]
 B = [<span class=hljs-number >25</span>,<span class=hljs-number >14</span>,<span class=hljs-number >23</span>,<span class=hljs-number >13</span>]
-df1 = DataFrame(sch=A,pgms=B)</code></pre> <pre><code class="plaintext hljs">4×2 DataFrame
+df = DataFrame(sch=A,pgms=B)</code></pre> <pre><code class="plaintext hljs">4×2 DataFrame
  Row │ sch     pgms
      │ String  Int64
 ─────┼───────────────
    1 │ NSHD       25
    2 │ SHBS       14
    3 │ SBIZ       23
-   4 │ SST        13</code></pre> <h2 id=manual_dataentry_by_csv ><a href="#manual_dataentry_by_csv" class=header-anchor >manual DataEntry by CSV</a></h2> <pre><code class="julia hljs"><span class=hljs-keyword >using</span> Pkg
+   4 │ SST        13</code></pre> <h3 id=12_manual_dataentry_by_csvreadiobuffer ><a href="#12_manual_dataentry_by_csvreadiobuffer" class=header-anchor >1.2 manual DataEntry by CSV.read&#40;IOBuffer&#41;</a></h3> <pre><code class="julia hljs"><span class=hljs-keyword >using</span> Pkg
 Pkg.add(<span class=hljs-string >&quot;CSV&quot;</span>)
 <span class=hljs-keyword >using</span> DataFrames, CSV
-df2 = CSV.read(<span class=hljs-built_in >IOBuffer</span>(<span class=hljs-string >&quot;&quot;&quot;
-sch2, pgms2
+df1 = CSV.read(<span class=hljs-built_in >IOBuffer</span>(<span class=hljs-string >&quot;&quot;&quot;
+sch, pgms
 SBIZ, 12
 NSHD,14
 SHBS, 4
 SST, 3
 &quot;&quot;&quot;</span>),DataFrame, delim=<span class=hljs-string >&quot;,&quot;</span>,ignorerepeated=<span class=hljs-literal >true</span>)</code></pre> <pre><code class="plaintext hljs">4×2 DataFrame
- Row │ sch2      pgms2
+ Row │ sch       pgms
      │ String7  Int64
-─────┼─────────────────
-   1 │ SBIZ         12
-   2 │ NSHD         14
-   3 │ SHBS          4
-   4 │ SST           3</code></pre> <h2 id=import_csv_files_using_csvread ><a href="#import_csv_files_using_csvread" class=header-anchor >import csv files using <code>CSV.read</code></a></h2> <pre><code class="julia hljs"><span class=hljs-keyword >using</span> DataFrames, CSV
-df3 = CSV.read(<span class=hljs-string >&quot;_assets/csv/SchPgms.csv&quot;</span>, DataFrame)</code></pre> <pre><code class="plaintext hljs">4×2 DataFrame
+─────┼────────────────
+   1 │ SBIZ        12
+   2 │ NSHD        14
+   3 │ SHBS         4
+   4 │ SST          3</code></pre> <h2 id=ol_start2_import_csv_files_using_csvread ><a href="#ol_start2_import_csv_files_using_csvread" class=header-anchor ><ol start=2 > <li><p>import csv files using <code>CSV.read</code></p> </ol> </a></h2> <pre><code class="julia hljs"><span class=hljs-keyword >using</span> DataFrames, CSV
+df2 = CSV.read(<span class=hljs-string >&quot;_assets/csv/SchPgms.csv&quot;</span>, DataFrame)</code></pre> <pre><code class="plaintext hljs">4×2 DataFrame
  Row │ sch      pgms
      │ String7  Int64
 ─────┼────────────────
    1 │ SBIZ        12
    2 │ NSHD        14
    3 │ SHBS         4
-   4 │ SST          3</code></pre> <h2 id=sort_df3_by_pgms_in_descending_order ><a href="#sort_df3_by_pgms_in_descending_order" class=header-anchor ><code>sort</code> df3 by pgms in descending order</a></h2> <pre><code class="julia hljs">df4 = sort(df3, :pgms, rev=<span class=hljs-literal >true</span>)</code></pre>
-<pre><code class="plaintext hljs">4×2 DataFrame
+   4 │ SST          3</code></pre> <h2 id=ol_start3_sort_df ><a href="#ol_start3_sort_df" class=header-anchor ><ol start=3 > <li><p>Sort df</p> </ol> </a></h2> <h3 id=31_sort_df3_by_pgms_in_descending_order ><a href="#31_sort_df3_by_pgms_in_descending_order" class=header-anchor >3.1 <code>sort</code> df3 by pgms in descending order</a></h3> <pre><code class="julia hljs"><span class=hljs-keyword >using</span> DataFrames, CSV
+df2 = CSV.read(<span class=hljs-string >&quot;_assets/csv/SchPgms.csv&quot;</span>, DataFrame)
+df3 = sort(df2, :pgms, rev=<span class=hljs-literal >true</span>)</code></pre> <pre><code class="plaintext hljs">4×2 DataFrame
  Row │ sch      pgms
      │ String7  Int64
 ─────┼────────────────
    1 │ NSHD        14
    2 │ SBIZ        12
    3 │ SHBS         4
-   4 │ SST          3</code></pre>
-<h2 id=choose_rows_using_filter ><a href="#choose_rows_using_filter" class=header-anchor >choose rows using <code>filter</code></a></h2>
-<pre><code class="julia hljs">filter(:sch =&gt; n-&gt;n == <span class=hljs-string >&quot;NSHD&quot;</span>,df4)</code></pre>
-<pre><code class="plaintext hljs">1×2 DataFrame
- Row │ sch      pgms
-     │ String7  Int64
-─────┼────────────────
-   1 │ NSHD        14</code></pre>
-<h2 id=choose_rows_using_subset ><a href="#choose_rows_using_subset" class=header-anchor >choose rows using <code>subset</code></a></h2>
-<pre><code class="julia hljs">subset(df4, :sch =&gt; ByRow(==(<span class=hljs-string >&quot;SST&quot;</span>)))</code></pre>
+   4 │ SST          3</code></pre> <h2 id=ol_start4_rows_and_columns ><a href="#ol_start4_rows_and_columns" class=header-anchor ><ol start=4 > <li><p>Rows and Columns</p> </ol> </a></h2> <h3 id=41_choose_rows_using_filter ><a href="#41_choose_rows_using_filter" class=header-anchor >4.1 choose rows using <code>filter</code></a></h3> <p>&#40;&#42; special case: the df appears at the end&#41;</p> <pre><code class="julia hljs"><span class=hljs-keyword >using</span> DataFrames
+filter(:sch =&gt; n -&gt; n==<span class=hljs-string >&quot;NSHD&quot;</span>,df4)</code></pre> <pre><code class="plaintext hljs">UndefVarError: df4 not defined
+</code></pre> <h3 id=42_choose_rows_using_subset ><a href="#42_choose_rows_using_subset" class=header-anchor >4.2 choose rows using <code>subset</code></a></h3> <p>&#40;this is better, consistent df, consistent ByRow&#41;</p> <pre><code class="julia hljs">subset(df3, :sch =&gt; ByRow(==(<span class=hljs-string >&quot;SST&quot;</span>)))</code></pre>
 <pre><code class="plaintext hljs">1×2 DataFrame
  Row │ sch      pgms
      │ String7  Int64
 ─────┼────────────────
    1 │ SST          3</code></pre>
-<h2 id=choose_columns_using_select ><a href="#choose_columns_using_select" class=header-anchor >choose columns using <code>select</code></a></h2>
-<pre><code class="julia hljs">select(df4, :pgms)</code></pre>
+<h3 id=43_choose_columns_using_select ><a href="#43_choose_columns_using_select" class=header-anchor >4.3 choose columns using <code>select</code></a></h3>
+<pre><code class="julia hljs"><span class=hljs-keyword >using</span> DataFrames
+select(df3, :pgms)</code></pre>
 <pre><code class="plaintext hljs">4×1 DataFrame
  Row │ pgms
      │ Int64
@@ -67,8 +62,24 @@ df3 = CSV.read(<span class=hljs-string >&quot;_assets/csv/SchPgms.csv&quot;</spa
    2 │    12
    3 │     4
    4 │     3</code></pre>
+<h2 id=ol_start5_transform ><a href="#ol_start5_transform" class=header-anchor ><ol start=5 >
+<li><p>Transform</p>
+
+</ol>
+</a></h2>
+<h3 id=add_new_column ><a href="#add_new_column" class=header-anchor >add new column</a></h3>
+<pre><code class="julia hljs"><span class=hljs-keyword >using</span> DataFrames
+transform(df3,:, :pgms =&gt; ByRow(x -&gt; x+<span class=hljs-number >1</span>)=&gt;:pgmsAdd1)</code></pre>
+<pre><code class="plaintext hljs">4×3 DataFrame
+ Row │ sch      pgms   pgmsAdd1
+     │ String7  Int64  Int64
+─────┼──────────────────────────
+   1 │ NSHD        14        15
+   2 │ SBIZ        12        13
+   3 │ SHBS         4         5
+   4 │ SST          3         4</code></pre>
 <div class=page-foot >
-  Created by YueKee WONG.  Last modified: December 14, 2022. <br />
+  Created by YueKee WONG.  Last modified: December 19, 2022. <br />
 
   Website built with
   <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the

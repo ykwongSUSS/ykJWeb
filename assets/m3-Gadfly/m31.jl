@@ -3,9 +3,9 @@ using Pkg
 Pkg.add("CSV")
 using DataFrames, CSV
 df1 = CSV.read(IOBuffer("""
-sch, pgms
-SBIZ, 12
+sch,pgms
+SBIZ,12
 NSHD,14
-SHBS, 4
-SST, 3
+SHBS,4
+SST,3
 """),DataFrame, delim=",",ignorerepeated=true)

@@ -1,1 +1,60 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/ykJWeb/libs/highlight/styles/github.min.css"> <link rel=stylesheet  href="/ykJWeb/css/franklin.css"> <link rel=stylesheet  href="/ykJWeb/css/jemdoc.css"> <link rel=icon  href="/ykJWeb/assets/favicon.png"> <title>m3-Gadfly.md</title> <main class=outside > <div class=box > <aside class=layout-menu > <div class=menu-category >myJulia</div> <div class="menu-item "><a href="/ykJWeb/">Home</a></div> <div class="menu-item "><a href="/ykJWeb/pluto">Pluto</a></div> <div class="menu-item "><a href="/ykJWeb/franklin">Franklin</a></div> <div class=menu-category >Julia Code</div> <div class="menu-item "><a href="/ykJWeb/m1-RDatasets/">RDatasets</a></div> <div class="menu-item "><a href="/ykJWeb/m2-DataFrames/">DataFrames</a></div> <div class="menu-item "><a href="/ykJWeb/m3-Gadfly/">Gadfly</a></div> <div class="menu-item "><a href="/ykJWeb/m4-Projects/">Projects</a></div> </aside> <div class=layout-content > <div class=franklin-content > <h1 id=gadfly ><a href="#gadfly" class=header-anchor >Gadfly</a></h1> <div class=franklin-toc ><ol><li><a href="#bar_plots">Bar plots</a><li><a href="#line_plots">Line plots</a><li><a href="#annotations">Annotations</a></ol></div> <h2 id=bar_plots ><a href="#bar_plots" class=header-anchor >Bar plots</a></h2> <h2 id=line_plots ><a href="#line_plots" class=header-anchor >Line plots</a></h2> <h2 id=annotations ><a href="#annotations" class=header-anchor >Annotations</a></h2> <div class=page-foot > Created by YueKee WONG. Last modified: December 14, 2022. <br /> Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>. </div> </div> </div> <script src="/ykJWeb/libs/highlight/highlight.min.js"></script> <script>hljs.highlightAll();hljs.configure({tabReplace: ' '});</script> </div> </main>
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/ykJWeb/libs/highlight/styles/github.min.css"> <link rel=stylesheet  href="/ykJWeb/css/franklin.css"> <link rel=stylesheet  href="/ykJWeb/css/jemdoc.css"> <link rel=icon  href="/ykJWeb/assets/favicon.png"> <title>m3-Gadfly.md</title> <main class=outside > <div class=box > <aside class=layout-menu > <div class=menu-category >myJulia</div> <div class="menu-item "><a href="/ykJWeb/">Home</a></div> <div class="menu-item "><a href="/ykJWeb/pluto">Pluto</a></div> <div class="menu-item "><a href="/ykJWeb/franklin">Franklin</a></div> <div class=menu-category >Julia Code</div> <div class="menu-item "><a href="/ykJWeb/m1-RDatasets/">RDatasets</a></div> <div class="menu-item "><a href="/ykJWeb/m2-DataFrames/">DataFrames</a></div> <div class="menu-item "><a href="/ykJWeb/m3-Gadfly/">Gadfly</a></div> <div class="menu-item "><a href="/ykJWeb/m4-Projects/">Projects</a></div> </aside> <div class=layout-content > <div class=franklin-content > <h1 id=gadfly ><a href="#gadfly" class=header-anchor >Gadfly</a></h1> <div class=franklin-toc ><ol><li><a href="#31_bar_plots">3.1 Bar plots</a></ol></div> <h2 id=31_bar_plots ><a href="#31_bar_plots" class=header-anchor >3.1 Bar plots</a></h2> <pre><code class="julia hljs"><span class=hljs-keyword >using</span> Pkg
+Pkg.add(<span class=hljs-string >&quot;CSV&quot;</span>)
+<span class=hljs-keyword >using</span> DataFrames, CSV
+df1 = CSV.read(<span class=hljs-built_in >IOBuffer</span>(<span class=hljs-string >&quot;&quot;&quot;
+sch,pgms
+SBIZ,12
+NSHD,14
+SHBS,4
+SST,3
+&quot;&quot;&quot;</span>),DataFrame, delim=<span class=hljs-string >&quot;,&quot;</span>,ignorerepeated=<span class=hljs-literal >true</span>)</code></pre> <pre><code class="plaintext hljs">4×2 DataFrame
+ Row │ sch      pgms
+     │ String7  Int64
+─────┼────────────────
+   1 │ SBIZ        12
+   2 │ NSHD        14
+   3 │ SHBS         4
+   4 │ SST          3</code></pre> <pre><code class="julia hljs">dfs = sort(df1,:pgms, rev=<span class=hljs-literal >true</span>)</code></pre>
+<pre><code class="plaintext hljs">4×2 DataFrame
+ Row │ sch      pgms
+     │ String7  Int64
+─────┼────────────────
+   1 │ NSHD        14
+   2 │ SBIZ        12
+   3 │ SHBS         4
+   4 │ SST          3</code></pre>
+<pre><code class="julia hljs"><span class=hljs-keyword >using</span> Pkg
+Pkg.add(<span class=hljs-string >&quot;Gadfly&quot;</span>)
+Pkg.add(<span class=hljs-string >&quot;Colorschemes&quot;</span>)
+<span class=hljs-keyword >using</span> Gadfly
+<span class=hljs-keyword >using</span> Colorschemes</code></pre>
+<blockquote>
+<p>plot the chart to the img<br />then show img</p>
+</blockquote>
+<pre><code class="julia hljs">schPgms = plot(dfs,
+x=:sch, y=:pgms,
+color=:sch,
+Theme(bar_spacing=<span class=hljs-number >1</span>mm),
+Geom.bar,
+Guide.title(<span class=hljs-string >&quot;No of programs by schools&quot;</span>),
+Guide.xlabel(<span class=hljs-string >&quot;School&quot;</span>),
+Guide.ylabel(<span class=hljs-string >&quot;No of Pgms&quot;</span>),
+img = PNG(<span class=hljs-string >&quot;schPgms.png&quot;</span>,<span class=hljs-number >14</span>cm, <span class=hljs-number >8</span>cm)
+draw(img,schPgms)</code></pre>
+<div class=page-foot >
+  Created by YueKee WONG.  Last modified: December 19, 2022. <br />
+
+  Website built with
+  <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the
+  <a href="https://julialang.org">Julia programming language</a>.
+</div>
+</div>
+        </div>
+    
+    
+        <script src="/ykJWeb/libs/highlight/highlight.min.js"></script>
+<script>hljs.highlightAll();hljs.configure({tabReplace: '    '});</script>
+
+    
+    </div>
+  </main>
