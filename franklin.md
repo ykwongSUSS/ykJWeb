@@ -7,16 +7,18 @@ I use Franklin to build this website.
 
 Refer YouTube: [Intro to Franklin, a Julia Static Site Generator](https://www.youtube.com/watch?v=fVBiLEtZB7A)
 
+## 
+\toc 
+
 ### Franklin Workflow:
 
 1. Open VSCode. Open julia-Franklin workspace.
 1. Activate Julia extension on VSCode `alt-j`, `alt-o`
 1. cd("`/Users/ykwong/myJulia/julia-Franklin/ykWeb/ykJWeb`")
 1. pkg> add Franklin 
+1. pkg> `activate .` at current directory ykJWeb
 1. julia> using Franklin
-1. `activate .` at current directory ykJWeb
-1. if newsite then 
-      julia> newsite("ykJWeb"; template="jemdoc")
+1. if newsite then julia> newsite("ykJWeb"; template="jemdoc")\
    else
       `activate .` at current directory ykJWeb
 1. julia> `serve()`
